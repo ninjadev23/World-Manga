@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+@tailwind utilities;
+body{
+    font-family: "TikTok Sans", sans-serif;
+}
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.glowing-border {
+  background-image: linear-gradient(270deg, rgba(255, 255, 255, 0.8), rgba(200, 200, 200, 0.3), rgba(255, 255, 255, 0.8));
+  background-size: 300% 300%;
+  animation: shine 3s linear infinite;
+  border-image: linear-gradient(270deg, rgba(255, 255, 255, 0.8), rgba(200, 200, 200, 0.3), rgba(255, 255, 255, 0.8)) 1;
+  border-style: solid;
+}

@@ -1,0 +1,12 @@
+db.sqlite
+.env
+*.env
+*/node_modules
+/build
+/dist
+
+
+/media
+*/__pycache__/
+*.pyc
+**/migrations/__pycache__/
