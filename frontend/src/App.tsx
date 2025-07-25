@@ -5,6 +5,11 @@ import MangaDetails from "./pages/MangaDetails"
 import NotFound from "./pages/NotFound"
 import ReaderManga from "./pages/ReaderManga"
 import Favorites from "./pages/Favorites"
+import Signup from "./pages/Signup"
+import Login from "./pages/Login"
+import Profile from "./pages/Profile"
+import Public from "./pages/Public"
+import NewMangas from "./pages/NewMangas"
 export default function App(){
     return useRoutes([
         {
@@ -25,6 +30,26 @@ export default function App(){
                 {
                     element: <Favorites/>,
                     path: "/favorites"
+                },
+                {
+                    element: <Signup/>,
+                    path: "/signup"
+                },
+                {
+                    element: <Login/>,
+                    path: "/login"
+                },
+                {
+                    element: <Profile/>,
+                    path:"/profile"
+                },
+                {
+                    element: <Public/>,
+                    path: "/publicar"
+                },
+                {
+                    element: <NewMangas/>,
+                    path: "/publicar/manga"
                 }
             ]
         },

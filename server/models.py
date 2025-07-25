@@ -17,6 +17,11 @@ def unique_cover_image_path(instance, filename):
     filename = f"cover_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}.{ext}"
     return os.path.join('covers', filename)
 
+def unique_avatar_image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f"user_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}.{ext}"
+    return os.path.join('users', filename)
+
 
 class Volume(models.Model):
     manga = models.ForeignKey('Manga', related_name='volumes', on_delete=models.CASCADE)
@@ -40,11 +45,11 @@ class Manga(models.Model):
     language = models.CharField(choices=LANG_CHOICES, max_length=10)    
     cover = models.ImageField(upload_to=unique_cover_image_path)
 
-
 class AppUser(AbstractUser):
     username = models.CharField(max_length=100, unique=False)
     email = models.CharField(max_length=200, unique=True)
-    avatarUrl = models.CharField(default='default-avatar.jpg')
+    favorites = models.JSONField(blank=True, default=list)
+    avatar = models.ImageField(upload_to=unique_avatar_image_path, default="/users/default-avatar.jpg")
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

@@ -1,5 +1,5 @@
 ### World Manga
-World Manga es una web en la que los usuarios pueden registrarse y compartir tomos de manga/manhwa de forma gratuita y sin anuncion, con un diseño moderno, vistoso y responsivo esta hecho con react, react router y el backend hecho en python, django y django rest framework
+World Manga es una web en la que los usuarios pueden registrarse y compartir tomos de manga/manhwa de forma gratuita y sin anuncion, con un diseño moderno, vistoso, fondo dinamico y responsivo hecho con react, react router y el backend hecho en python, django y django rest framework
 
 ### Frontend With React and React Router
 ![Example](/ScreenshotOne.png)

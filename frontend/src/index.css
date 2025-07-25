@@ -1,9 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
-@tailwind utilities;
-body{
-    font-family: "TikTok Sans", sans-serif;
-}
 @keyframes shine {
   0% {
     background-position: 0% 50%;

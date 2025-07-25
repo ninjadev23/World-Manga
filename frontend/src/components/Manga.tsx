@@ -37,14 +37,14 @@ const Manga: React.FC<Props> = ({
     if(favorites.includes(id)) setStarted(true)
   },[started])
   return (
-    <div className="text-white shadow-sm bg-black/40 backdrop-blur-md rounded-md flex gap-1 items-center flex-col w-60 h-[430px] border border-white/30">
+    <div className="text-white shadow-sm bg-black/40 backdrop-blur-md rounded-md flex gap-1 items-center flex-col w-55 h-[450px] border border-white/30">
       <img className="object-cover w-full h-40" src={cover} alt="Cover" />
-      <div className="capitalize px-5 flex flex-col items-center">
-        <h2 className="m-0 text-center w-11/12 font-bold text-2xl border-b pb-1">
+      <div className="capitalize px-2 flex flex-col items-center">
+        <h2 className="m-0 text-center  font-bold text-[1.2rem] border-b pb-1">
           {title}
         </h2>
-        <p className="capitalize overflow-scroll h-28 block">{description}</p>
-        <div className="mt-1 flex gap-1">
+        <p className="capitalize overflow-scroll h-28 overflow-y-scroll scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-200 scrollbar-thin">{description}</p>
+        <div className="w-full justify-center mt-2 max-h-14 overflow-hidden flex gap-1 flex-wrap">
           {categories.map((category, index) => (
             <p
               className="capitalize bg-black/40 p-1 border border-white/30 rounded-sm"

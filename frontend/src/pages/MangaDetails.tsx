@@ -22,7 +22,7 @@ export default function MangaDetails() {
       <div className="text-center p-3 bg-black/40 backdrop-blur-md">
         <BackButton className="flex"/>
         <h1 className="font-bold text-2xl capitalize">{mangaDetail?.title}</h1>
-        <p className="m-5">{mangaDetail?.description}</p>
+        <p className="mt-5">{mangaDetail?.description}</p>
         <div className="mt-1 flex gap-1 justify-center">
           {mangaDetail?.categories.map((category, index) => (
             <p

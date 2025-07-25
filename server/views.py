@@ -31,7 +31,7 @@ class MangaView(viewsets.ModelViewSet):
     queryset = Manga.objects.all()
     serializer_class = MangaSerializer
     authentication_classes = [CookieTokenAuthentication]
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'language']
     def perform_create(self, serializer):
@@ -70,23 +70,41 @@ def signup(request):
     if serializer.is_valid():
         newUser = serializer.save()
         newUser.set_password(serializer.data['password'])
+        newUser.is_active = True
         newUser.save()
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
+        token, created = Token.objects.get_or_create(user=newUser)
+        response = Response(serializer.data, status = status.HTTP_201_CREATED)
+        cookie_secure = os.environ.get('COOKIE_SECURE', 'False').lower() == 'true'
+        response.set_cookie(
+            key = 'auth_token',
+            value = token.key,
+            httponly = True,
+            max_age = 60 * 60 * 24 * 20,  # 20 días en segundos,
+            secure = cookie_secure,
+            samesite='None' if cookie_secure else 'Lax' 
+        )
+        
+        return response
+        
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
 @api_view(['POST'])
 def login(request):
-    user = get_object_or_404(AppUser, email = request.data['email'])
-    if not user.check_password(request.data['password']):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    if not email or not password:
+        return Response({"error": "Email and password are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = get_object_or_404(AppUser, email = email)
+    if not user.check_password(password):
         return Response({
             'error': 'Incorrect Password'
         },status = status.HTTP_400_BAD_REQUEST)
+        
     token, created = Token.objects.get_or_create(user=user)
-    
-    serializer = UserSerializer(instance=user)
-    
     response = Response({
-        'token': token.key,
-        'user': serializer.data
+        "token": token.key 
     })
     cookie_secure = os.environ.get('COOKIE_SECURE', 'False').lower() == 'true'
     response.set_cookie(
@@ -94,6 +112,45 @@ def login(request):
         value = token.key,
         httponly = True,
         max_age = 60 * 60 * 24 * 20,  # 20 días en segundos,
-        secure = cookie_secure
+        secure = cookie_secure,
+        samesite='None' if cookie_secure else 'Lax' 
     )
+            
+    return response
+    
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([CookieTokenAuthentication])
+def profile(request):
+    user = get_object_or_404(AppUser, email = request.user)
+    serializer = UserSerializer(instance=user)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([CookieTokenAuthentication])
+def mangas_of_user(request):
+    mangas = Manga.objects.filter(user=request.user)
+    serializer = MangaSerializer(mangas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([CookieTokenAuthentication])
+def update_user(request):
+    user = request.user
+    serializer = UserSerializer(user, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([CookieTokenAuthentication])
+def logout(request):
+    response = Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
+    response.delete_cookie("auth_token")
+    Token.objects.filter(user=request.user).delete()
+
     return response
