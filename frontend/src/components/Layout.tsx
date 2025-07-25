@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X, Search, Github } from "lucide-react";
 import { useUser } from "../context/UserContext";
@@ -57,31 +57,31 @@ export default function Layout() {
         <nav className="fixed top-0 left-0 w-full z-30 bg-black/30 backdrop-blur-md border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
-              <NavLink to="/">
+              <Link to="/">
                 <h1 className="text-[1.2rem] text-white border p-2 font-bold border-white/20 rounded-lg max-[940px]:text-[1rem] max-[940px]:p-1.5">
                   World Manga
                 </h1>
-              </NavLink>
+              </Link>
 
               <div className="flex items-center space-x-8 max-[940px]:space-x-4">
-                <NavLink
+                <Link
                   to="/favorites"
                   className="hover:border-b text-white hover:text-gray-300 font-medium hidden md:inline max-[940px]:text-sm"
                 >
                   Favoritos
-                </NavLink>
+                </Link>
                 <a
                   href="#"
                   className="hover:border-b text-white hover:text-gray-300 font-medium hidden md:inline max-[940px]:text-sm"
                 >
                   Continuar Leyendo
                 </a>
-                <NavLink
+                <Link
                   to="/publicar"
                   className="hover:border-b text-white hover:text-gray-300 font-medium hidden md:inline max-[940px]:text-sm"
                 >
                   Publicar Tomos
-                </NavLink>
+                </Link>
               </div>
 
               {/* Mobile menu button */}
@@ -113,15 +113,15 @@ export default function Layout() {
                   <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white w-4 h-4" />
                 </div>
                 {!user && (
-                  <NavLink
+                  <Link
                     to="/signup"
                     className="text-white hover:text-gray-300 font-medium"
                   >
                     Signup
-                  </NavLink>
+                  </Link>
                 )}
                 {user && (
-                  <NavLink to="/profile">
+                  <Link to="/profile">
                     <div className="overflow-hidden hover:bg-black/20 border p-1 rounded-md border-white/10 m-0 flex text-white gap-2 items-center flex-wrap">
                       <img
                         className="w-10 h-10 object-cover rounded-full"
@@ -130,7 +130,7 @@ export default function Layout() {
                       />
                       <p className="max-w-24 font-bold">{user.username}</p>
                     </div>
-                  </NavLink>
+                  </Link>
                 )}
               </div>
             </div>
@@ -138,34 +138,34 @@ export default function Layout() {
             {/* Mobile menu dropdown */}
             {menuOpen && (
               <div className="md:hidden mt-2 space-y-2 pb-4">
-                <a
-                  href="#"
+                <Link
+                  to="/favorites"
                   className="hover:border-b block text-white hover:text-gray-300 font-medium"
                 >
                   Favoritos
-                </a>
+                </Link>
                 <a
                   href="#"
                   className="hover:border-b block text-white hover:text-gray-300 font-medium"
                 >
                   Continuar Leyendo
                 </a>
-                <a
-                  href="#"
+                <Link
+                  to="/publicar"
                   className="hover:border-b block text-white hover:text-gray-300 font-medium"
                 >
                   Publicar Tomos
-                </a>
+                </Link>
                 {!user && (
-                  <NavLink
+                  <Link
                     to="/signup"
                     className="text-white hover:text-gray-300 font-medium"
                   >
                     Signup
-                  </NavLink>
+                  </Link>
                 )}
                 {user && (
-                  <NavLink to="/profile">
+                  <Link to="/profile">
                     <div className="hover:bg-black/20 border p-1 rounded-md border-white/10 m-0 flex text-white gap-2 items-center">
                       <img
                         className="w-10 h-10 rounded-full"
@@ -176,7 +176,7 @@ export default function Layout() {
                         {user.username}
                       </p>
                     </div>
-                  </NavLink>
+                  </Link>
                 )}
                 <div className="relative">
                   <input

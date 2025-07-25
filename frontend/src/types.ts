@@ -11,6 +11,7 @@ export interface TypeManga {
     language: string
     cover: string
     username: string
+    authorAvatar: string
     volumes: TypeVolume[]
 }
 export interface User{
@@ -36,5 +37,6 @@ export const categories = [
   "Shonen",
   "Seinen",
   "Fantasia Oscura",
-  "Demonios"
+  "Demonios",
+  "Heroes"
 ]

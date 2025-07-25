@@ -73,7 +73,7 @@ export default function Share() {
           />
           <Link
             className="flex gap-1 rounded bg-white/20 text-white hover:bg-white/30 hover:cursor-pointer transition p-2"
-            to="publicar/volume/"
+            to="/publicar/volumes"
           >
             <Upload className="w-5 h-5" />
             Compartir Tomos o Capitulos

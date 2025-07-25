@@ -15,3 +15,14 @@
   border-image: linear-gradient(270deg, rgba(255, 255, 255, 0.8), rgba(200, 200, 200, 0.3), rgba(255, 255, 255, 0.8)) 1;
   border-style: solid;
 }
+/* en src/index.css o donde tengas tus estilos globales */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}

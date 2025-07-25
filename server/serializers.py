@@ -5,6 +5,7 @@ import os
 class MangaSerializer(serializers.ModelSerializer):
     volumes = serializers.SerializerMethodField()
     username = serializers.ReadOnlyField(source='user.username')
+    authorAvatar = serializers.SerializerMethodField()
     class Meta:
         model = Manga
         fields = [
@@ -16,7 +17,8 @@ class MangaSerializer(serializers.ModelSerializer):
             'cover',
             'user',
             'username',
-            'volumes'
+            'authorAvatar',
+            'volumes',
         ]
         read_only_fields = ['user']
      
@@ -38,6 +40,14 @@ class MangaSerializer(serializers.ModelSerializer):
         return VolumeSerializer(volumes, many=True).data
 
 
+    def get_authorAvatar(self, obj):
+        request = self.context.get('request')
+        if obj.user.avatar and hasattr(obj.user.avatar, 'url'):
+            if request is not None:
+                return request.build_absolute_uri(obj.user.avatar.url)
+            return obj.user.avatar.url
+        return None
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppUser

@@ -48,7 +48,7 @@ class MangaView(viewsets.ModelViewSet):
 class UploadVolumeView(APIView):
     parser_classes = [MultiPartParser, FormParser]
     authentication_classes = [CookieTokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, manga_id):
         try:

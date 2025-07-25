@@ -13,6 +13,7 @@ export default function Home() {
     const load = async () => {
       const data = await GetAllMangas();
       if (Array.isArray(data.data)) setMangas(data.data);
+      console.log(data.data[0])
     };
     load();
   }, []);
@@ -36,6 +37,7 @@ export default function Home() {
                 categories={manga.categories}
                 description={manga.description}
                 username={manga.username}
+                authorAvatar={manga.authorAvatar}
               />
             )
         )}

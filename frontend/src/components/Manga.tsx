@@ -2,14 +2,9 @@ import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-type Props = {
-  id: number;
-  title: string;
-  description: string;
-  categories: string[];
-  username: string;
-  cover: string;
-};
+import type { TypeManga } from "../types";
+import ProfileMiniCard from "./ProfileMiniCard";
+type Props = Omit<TypeManga, "volumes" | "language">
 const Manga: React.FC<Props> = ({
   id,
   title,
@@ -17,6 +12,7 @@ const Manga: React.FC<Props> = ({
   categories,
   cover,
   username,
+  authorAvatar
 }) => {
   const [started, setStarted] = useState<boolean>(false)
   const handleStar = () => {
@@ -43,7 +39,7 @@ const Manga: React.FC<Props> = ({
         <h2 className="m-0 text-center  font-bold text-[1.2rem] border-b pb-1">
           {title}
         </h2>
-        <p className="capitalize overflow-scroll h-28 overflow-y-scroll scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-200 scrollbar-thin">{description}</p>
+        <p className="capitalize h-28 overflow-y-scroll scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">{description}</p>
         <div className="w-full justify-center mt-2 max-h-14 overflow-hidden flex gap-1 flex-wrap">
           {categories.map((category, index) => (
             <p
@@ -54,10 +50,7 @@ const Manga: React.FC<Props> = ({
             </p>
           ))}
         </div>
-
-        <p className="p-1">
-          Por: <span className="font-bold">{username}</span>
-        </p>
+          <ProfileMiniCard text="Por:" username={username} authorAvatar={authorAvatar}/>
         <div className="flex w-full justify-center gap-3 flex-wrap">
           <button
             onClick={handleStar}

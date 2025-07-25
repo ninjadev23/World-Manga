@@ -16,6 +16,12 @@ export const CreateManga = (data: FormData)=>{
     withCredentials: true
   })
 }
+export const CreateVolume = (mangaID: number, data: FormData)=>{
+  return axios.post(`/api/v1/mangas/${mangaID}/upload-volume/`, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+    withCredentials: true
+  })
+}
 //export const loadMangasByQuery = (title: string)=>{
   //  return axios.get(`{}`)
 //}
