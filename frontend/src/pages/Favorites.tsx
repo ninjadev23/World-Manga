@@ -49,6 +49,8 @@ export default function Favorites() {
             categories={manga.categories}
             username={manga.username}
             cover={manga.cover}
+            authorAvatar={manga.authorAvatar}
+            key={manga.id}
           />
         ))}
       </div>

@@ -2,6 +2,7 @@ export interface TypeVolume {
     file: string
     number: number
     cover: string
+    id: number
 }
 export interface TypeManga {
     id: number

@@ -8,9 +8,10 @@ urlpatterns = [
     path('', include(router.urls)),
     path('login', views.login),
     path('signup', views.signup),
-    path('mangas/<int:manga_id>/upload-volume/', views.UploadVolumeView.as_view()),
+    path('mangas/<int:manga_id>/volumes/', views.UploadVolumeView.as_view()),
     path('profile', views.profile),
     path('logout', views.logout),
     path('update_user', views.update_user) ,
-    path('usermangas', views.mangas_of_user) 
+    path('usermangas', views.mangas_of_user),
+    path('mangas/volumes/<int:volume_id>/', views.delete_volume),
 ]

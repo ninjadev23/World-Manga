@@ -125,7 +125,13 @@ export default function Layout() {
                     <div className="overflow-hidden hover:bg-black/20 border p-1 rounded-md border-white/10 m-0 flex text-white gap-2 items-center flex-wrap">
                       <img
                         className="w-10 h-10 object-cover rounded-full"
-                        src={user.avatar}
+                        src={
+                          typeof user.avatar === "string"
+                            ? user.avatar
+                            : user.avatar instanceof File
+                            ? URL.createObjectURL(user.avatar)
+                            : undefined
+                        }
                         alt="avatar"
                       />
                       <p className="max-w-24 font-bold">{user.username}</p>
@@ -169,7 +175,13 @@ export default function Layout() {
                     <div className="hover:bg-black/20 border p-1 rounded-md border-white/10 m-0 flex text-white gap-2 items-center">
                       <img
                         className="w-10 h-10 rounded-full"
-                        src={user.avatar}
+                        src={
+                          typeof user.avatar === "string"
+                            ? user.avatar
+                            : user.avatar instanceof File
+                            ? URL.createObjectURL(user.avatar)
+                            : undefined
+                        }
                         alt="avatar"
                       />
                       <p className="font-bold text-[1.1rem]">

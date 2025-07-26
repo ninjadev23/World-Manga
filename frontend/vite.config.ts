@@ -3,6 +3,11 @@ import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
   plugins: [react()],
+    base: "/assets/",
+   build: {
+    outDir: "dist",
+    assetsDir: "assets",
+  },
   server: {
     proxy: {
       '/api': {

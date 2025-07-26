@@ -154,3 +154,17 @@ def logout(request):
     Token.objects.filter(user=request.user).delete()
 
     return response
+
+@api_view(['DELETE'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([CookieTokenAuthentication])
+def delete_volume(request, volume_id):
+    try:
+        volume = Volume.objects.select_related('manga').get(id=volume_id)
+    except Volume.DoesNotExist:
+        return Response({'detail': 'Volume not found'}, status=status.HTTP_404_NOT_FOUND)
+    if volume.manga.user != request.user:
+        return Response({'detail': 'Not authorized to delete this volume'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    volume.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)

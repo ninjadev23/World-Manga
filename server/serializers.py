@@ -56,7 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
 class VolumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Volume
-        fields = ['number', 'file', 'cover']
+        fields = ['number', 'file', 'cover', 'id']
     
     def validate_file(self, value):
         ext = os.path.splitext(value.name)[1].lower()

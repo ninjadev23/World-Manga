@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios, { isAxiosError } from "axios";
 import { LogoutEndPoint, UpdateUser } from "../api/users.api";
-import { GetMangasOfUser } from "../api/mangas.api";
+import { GetMangasOfUser, DeleteManga } from "../api/mangas.api";
 import type { UserUpdateType, TypeManga, BackendErrors } from "../types";
 import Manga from "../components/Manga";
 import { useUser } from "../context/UserContext";
 export default function Profile() {
-  const { user, refreshUser, setUser } = useUser();
+  const { refreshUser, setUser } = useUser();
   const navigate = useNavigate()
   const [profile, setProfile] = useState<UserUpdateType | null>(null);
   const [username, setUsername] = useState("");
@@ -80,7 +80,12 @@ export default function Profile() {
       console.error(err);
     }
   };
-
+  const handleDelete = async (id: number)=>{
+    const response = await DeleteManga(id);
+    if(response.status === 204){
+      setMangas(mangas.filter((manga) => manga.id !== id));
+    };
+  }
   if(loading) return <p className="text-center text-2xl mt-10">Cargando...</p>
   if(error && "notAuthorized" in error) return <p className="mt-10 text-center text-2xl">{error.notAuthorized[0]}</p>
   return (
@@ -124,9 +129,9 @@ export default function Profile() {
             {!editing ? (
               <>
                 <p>Nombre de usuario:</p>
-                <h2 className="capitalize text-2xl font-bold mb-3">{profile.username}</h2>
+                <h2 className="capitalize text-2xl font-bold mb-3">{profile?.username}</h2>
                 <p>Correo Electrónico:</p>
-                <h2 className="font-bold mb-3">{profile.email}</h2>
+                <h2 className="font-bold mb-3">{profile?.email}</h2>
 
                 <div className="flex justify-center gap-4 mt-4 flex-wrap">
                   <button
@@ -214,6 +219,9 @@ export default function Profile() {
                   username={manga.username}
                   cover={manga.cover}
                   id={manga.id}
+                  authorAvatar={manga.authorAvatar}
+                  isOwner={true}
+                  handleDelete={handleDelete}
                 />
               ))}
             </div>

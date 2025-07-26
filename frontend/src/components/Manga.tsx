@@ -1,10 +1,13 @@
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Trash } from "lucide-react";
 import type { TypeManga } from "../types";
 import ProfileMiniCard from "./ProfileMiniCard";
-type Props = Omit<TypeManga, "volumes" | "language">
+interface Props extends Omit<TypeManga, "volumes" | "language">{
+  isOwner?: boolean;
+  handleDelete?: (id: number) => void;
+}
 const Manga: React.FC<Props> = ({
   id,
   title,
@@ -12,7 +15,9 @@ const Manga: React.FC<Props> = ({
   categories,
   cover,
   username,
-  authorAvatar
+  authorAvatar,
+  isOwner = false,
+  handleDelete = () => {},
 }) => {
   const [started, setStarted] = useState<boolean>(false)
   const handleStar = () => {
@@ -32,18 +37,24 @@ const Manga: React.FC<Props> = ({
     if(!favorites && !Array.isArray(favorites)) return 
     if(favorites.includes(id)) setStarted(true)
   },[started])
+  
   return (
-    <div className="text-white shadow-sm bg-black/40 backdrop-blur-md rounded-md flex gap-1 items-center flex-col w-55 h-[450px] border border-white/30">
+    <div className="relative text-white shadow-sm bg-black/40 backdrop-blur-md rounded-md flex gap-1 items-center flex-col w-55 border border-white/30 pb-5">
+      {isOwner && 
+      <button onClick={()=>handleDelete(id)} className="absolute p-1 bg-black/60 hover:cursor-pointer hover:bg-black/70 right-0">
+        <Trash/>
+      </button>
+      }
       <img className="object-cover w-full h-40" src={cover} alt="Cover" />
       <div className="capitalize px-2 flex flex-col items-center">
         <h2 className="m-0 text-center  font-bold text-[1.2rem] border-b pb-1">
           {title}
         </h2>
         <p className="capitalize h-28 overflow-y-scroll scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">{description}</p>
-        <div className="w-full justify-center mt-2 max-h-14 overflow-hidden flex gap-1 flex-wrap">
+        <div className="w-full justify-center items-center mt-2 h-14 overflow-hidden flex gap-1 flex-wrap">
           {categories.map((category, index) => (
             <p
-              className="capitalize bg-black/40 p-1 border border-white/30 rounded-sm"
+              className="capitalize bg-black/40 p-1 border border-white/30 rounded-sm h-8"
               key={index}
             >
               {category}

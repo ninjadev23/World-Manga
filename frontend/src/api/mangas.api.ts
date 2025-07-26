@@ -17,8 +17,18 @@ export const CreateManga = (data: FormData)=>{
   })
 }
 export const CreateVolume = (mangaID: number, data: FormData)=>{
-  return axios.post(`/api/v1/mangas/${mangaID}/upload-volume/`, data, {
+  return axios.post(`/api/v1/mangas/${mangaID}/volumes/`, data, {
     headers: { "Content-Type": "multipart/form-data" },
+    withCredentials: true
+  })
+}
+export const DeleteVolume = (volumeID: number)=>{
+  return axios.delete(`/api/v1/mangas/volumes/${volumeID}/`, {
+    withCredentials: true
+  })
+}
+export const DeleteManga = (mangaID: number)=>{
+  return axios.delete(`/api/v1/mangas/${mangaID}/`, {
     withCredentials: true
   })
 }
