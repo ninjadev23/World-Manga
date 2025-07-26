@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <main className="mt-15">
       <h1 className="mb-10 text-center text-2xl font-bold">Mangas</h1>
-      <div className="flex gap-4 flex-wrap justify-center items-center">
+      <div className="flex gap-7 flex-wrap justify-center items-center">
         {filtered.map(
           (manga) =>
             isManga(manga) && (

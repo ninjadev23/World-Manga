@@ -6,8 +6,8 @@ World Manga es una web en la que los usuarios pueden registrarse y compartir tom
 ![Example](/ScreenshotTwo.png)
 ![Example](/ScreenshotThree.png)
 ![Example](/ScreenshotFour.png)
-### API With Django Rest Framework
 ![Example](/ScreenshotFive.png)
+![Example](/ScreenshotSix.png)
 
 ### Run Backend
 Clone repo
