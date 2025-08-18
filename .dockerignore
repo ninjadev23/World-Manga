@@ -1,0 +1,32 @@
+# Node y dependencias
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml
+
+# Archivos de Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+
+# Entornos virtuales
+venv/
+env/
+
+# Logs y bases de datos locales
+*.log
+db.sqlite3
+
+
+# Configs locales
+.env
+*.local
+.idea/
+.vscode/
+.DS_Store
+
+# Builds antiguos de frontend
+frontend/dist/

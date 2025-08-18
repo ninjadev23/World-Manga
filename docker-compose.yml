@@ -1,0 +1,14 @@
+services:
+  mangahub:
+    build:
+      context: .              # raíz del proyecto donde está el Dockerfile
+      dockerfile: Dockerfile  # tu Dockerfile único
+    container_name: mangahub_prod
+    ports:
+      - "80:80"   # Nginx
+      - "8000:8000"
+    volumes:
+      - ./media:/app/media   # sincroniza la carpeta media para uploads
+    env_file:
+      - .env                 # tus variables de entorno (SECRET_KEY, DATABASE_URL, etc)
+    restart: always
