@@ -2,7 +2,17 @@ from rest_framework import serializers
 from .models import Manga, AppUser, Volume
 import os
 
+class AbsoluteURLField(serializers.FileField):
+    def to_representation(self, value):
+        url = super().to_representation(value)
+        request = self.context.get('request')
+        if url and request:
+            return request.build_absolute_uri(url)
+        return url
+
 class MangaSerializer(serializers.ModelSerializer):
+    cover = AbsoluteURLField()
+    
     volumes = serializers.SerializerMethodField()
     username = serializers.ReadOnlyField(source='user.username')
     authorAvatar = serializers.SerializerMethodField()
@@ -37,8 +47,7 @@ class MangaSerializer(serializers.ModelSerializer):
 
     def get_volumes(self, obj):
         volumes = Volume.objects.filter(manga=obj).order_by('number')
-        return VolumeSerializer(volumes, many=True).data
-
+        return VolumeSerializer(volumes, many=True, context=self.context).data
 
     def get_authorAvatar(self, obj):
         request = self.context.get('request')
@@ -54,6 +63,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VolumeSerializer(serializers.ModelSerializer):
+    file = AbsoluteURLField()
+    cover = AbsoluteURLField()
+
     class Meta:
         model = Volume
         fields = ['number', 'file', 'cover', 'id']

@@ -26,7 +26,7 @@ def unique_avatar_image_path(instance, filename):
 class Volume(models.Model):
     manga = models.ForeignKey('Manga', related_name='volumes', on_delete=models.CASCADE)
     file = models.FileField(upload_to=unique_volume_file_path)
-    cover = models.ImageField(upload_to=unique_cover_image_path, default='volumes/covers/default-cover.jpg')
+    cover = models.ImageField(upload_to=unique_cover_image_path, default='volumes/covers/default-cover.webp')
     number = models.PositiveIntegerField()
     def __str__(self):
         return f"Volume {self.number} of {self.manga.title}"
@@ -49,7 +49,7 @@ class AppUser(AbstractUser):
     username = models.CharField(max_length=100, unique=False)
     email = models.CharField(max_length=200, unique=True)
     favorites = models.JSONField(blank=True, default=list)
-    avatar = models.ImageField(upload_to=unique_avatar_image_path, default="/users/default-avatar.jpg")
+    avatar = models.ImageField(upload_to=unique_avatar_image_path, default="/users/default-avatar.webp")
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

@@ -29,6 +29,14 @@ export default function Layout() {
     }
   };
 
+  // Precargado de imagenes
+  useEffect(() => {
+    for (let i = 1; i <= 18; i++) {
+      const img = new Image();
+      img.src = `/backgrounds/background${i}.webp`;
+    }
+  }, []);
+
   //This is for changing the background image, dinamic background image
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,7 +57,7 @@ export default function Layout() {
         key={backgroundNumber}
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `linear-gradient(to top left, rgba(0,0,0,0.4), rgba(17,24,39,0.3)), url(/backgrounds/background${backgroundNumber}.jpg)`,
+          backgroundImage: `linear-gradient(to top left, rgba(0,0,0,0.4), rgba(17,24,39,0.3)), url(/backgrounds/background${backgroundNumber}.webp)`,
           opacity: show ? 1 : 0,
         }}
       />
@@ -58,9 +66,7 @@ export default function Layout() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link to="/">
-                <h1 className="text-[1.2rem] text-white border p-2 font-bold border-white/20 rounded-lg max-[940px]:text-[1rem] max-[940px]:p-1.5">
-                  World Manga
-                </h1>
+                <img className="w-20 h-15 object-cover" src="/icono.webp" alt="World Manga" />
               </Link>
 
               <div className="flex items-center space-x-8 max-[940px]:space-x-4">
@@ -70,12 +76,12 @@ export default function Layout() {
                 >
                   Favoritos
                 </Link>
-                <a
-                  href="#"
+                <Link
+                  to="/continue-reading"
                   className="hover:border-b text-white hover:text-gray-300 font-medium hidden md:inline max-[940px]:text-sm"
                 >
                   Continuar Leyendo
-                </a>
+                </Link>
                 <Link
                   to="/publicar"
                   className="hover:border-b text-white hover:text-gray-300 font-medium hidden md:inline max-[940px]:text-sm"
@@ -150,12 +156,12 @@ export default function Layout() {
                 >
                   Favoritos
                 </Link>
-                <a
-                  href="#"
+                <Link
+                  to="/continue-reading"
                   className="hover:border-b block text-white hover:text-gray-300 font-medium"
                 >
                   Continuar Leyendo
-                </a>
+                </Link>
                 <Link
                   to="/publicar"
                   className="hover:border-b block text-white hover:text-gray-300 font-medium"

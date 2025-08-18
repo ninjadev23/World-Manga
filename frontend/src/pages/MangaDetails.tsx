@@ -2,10 +2,11 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetMangaDetails, DeleteVolume } from "../api/mangas.api";
 import type { TypeManga } from "../types";
-import { Download, ArrowRight, Trash } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { isManga } from "../utils";
 import BackButton from "../components/BackButton";
 import { GetProfile } from "../api/users.api";
+import VolumeCard from "../components/VolumeCard";
 export default function MangaDetails() {
   const [mangaDetail, setMangaDetail] = useState<TypeManga | null>(null);
   const { id } = useParams();
@@ -76,44 +77,15 @@ export default function MangaDetails() {
           </div>
         )}
         {mangaDetail?.volumes.map((volume) => (
-          <div
-            className="relative shadow-sm bg-black/40 backdrop-blur-md rounded-md"
-            key={volume.id}
-          >
-            {isOwner && (
-              <button
-                onClick={() => handleDeleteVolume(volume.id)}
-                className="absolute right-0 bg-black/30 p-1 hover:bg-black/60 hover:cursor-pointer"
-              >
-                <Trash />
-              </button>
-            )}
-            <img
-              className="w-40 h-50 object-cover"
-              src={`http://localhost:8000/${volume.cover}`}
-              alt=""
-            />
-            <h2 className="font-bold text-2xl text-center">
-              Tomo {volume.number}
-            </h2>
-            <div className="mb-2 flex justify-center gap-2">
-              <a
-                href={volume.file}
-                download={`${mangaDetail.title}-volume-${volume.number}.pdf`}
-                className="hover:scale-110 p-2 rounded-lg bg-black/30 inline-block"
-              >
-                <Download className="w-5 h-5" />
-              </a>
-              <Link
-                to={`/mangas/read/${mangaDetail.title}/${
-                  volume.number
-                }/${encodeURIComponent(volume.file)}`}
-                className="hover:scale-110 hover:cursor-pointer p-2 rounded-lg bg-black/30"
-              >
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          </div>
+          <VolumeCard 
+            id={volume.id}
+            number={volume.number}
+            file={volume.file}
+            cover={volume.cover}
+            MangaTitle={mangaDetail.title}
+            isOwner={isOwner}
+            handleDelete={handleDeleteVolume}
+          />
         ))}
       </div>
     </div>

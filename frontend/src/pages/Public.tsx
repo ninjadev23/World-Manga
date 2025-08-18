@@ -48,7 +48,7 @@ export default function Share() {
                 ? "opacity-0 translate-x-10"
                 : "opacity-100 translate-x-0"
             )}
-            src={`/wallpaper${imageOne}.jpg`}
+            src={`/wallpaper${imageOne}.webp`}
             alt=""
           />
           <Link
@@ -68,7 +68,7 @@ export default function Share() {
                 ? "opacity-0 -translate-x-10"
                 : "opacity-100 translate-x-0"
             )}
-            src={`/ImageTomos/cover${imageTwo}.jpg`}
+            src={`/ImageTomos/cover${imageTwo}.webp`}
             alt=""
           />
           <Link

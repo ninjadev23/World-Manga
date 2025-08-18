@@ -6,7 +6,6 @@ db.sqlite
 /dist
 /env
 
-/media
 */__pycache__/
 *.pyc
 **/migrations/__pycache__/

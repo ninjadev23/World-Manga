@@ -4,16 +4,19 @@ import type { TypeManga } from "../types";
 import { isManga } from "../utils";
 import Manga from "../components/Manga";
 import { useSearch } from "../context/SearchContext";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [mangas, setMangas] = useState<TypeManga[]>([]);
+  const [loading, setLoading] = useState(false)
   const { query } = useSearch();
 
   useEffect(() => {
+    setLoading(true)
     const load = async () => {
       const data = await GetAllMangas();
       if (Array.isArray(data.data)) setMangas(data.data);
-      console.log(data.data[0])
+      setLoading(false)
     };
     load();
   }, []);
@@ -41,6 +44,14 @@ export default function Home() {
               />
             )
         )}
+        {
+          loading && <h1 className="text-center text-2xl">Cargando...</h1>
+        }
+        {!loading && mangas.length<1 && 
+          <p className="text-center">
+              Aun No Hay Mangas Disponibles, ¿Quieres ser el primero en compartir <Link to="/publicar" className="p-2 bg-black/50">Compartir</Link>   
+          </p>
+        }
       </div>
     </main>
   );

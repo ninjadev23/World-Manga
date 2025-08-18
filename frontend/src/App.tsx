@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import Public from "./pages/Public";
 import NewMangas from "./pages/NewMangas";
 import NewVolume from "./pages/NewVolume";
+import ContinueReading from "./pages/ContinueReading";
 export default function App() {
   return useRoutes([
     {
@@ -59,6 +60,10 @@ export default function App() {
         {
           element: <NewVolume/>,
           path: "/publicar/volumes"
+        },
+        {
+          element: <ContinueReading/>,
+          path: "/continue-reading"
         }
       ],
     },

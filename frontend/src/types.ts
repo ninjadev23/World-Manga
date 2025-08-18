@@ -41,3 +41,10 @@ export const categories = [
   "Demonios",
   "Heroes"
 ]
+
+export interface VolueCardType extends TypeVolume {
+  MangaTitle: string;
+  isOwner?: boolean;
+  handleDelete?: (volumeID: number) => void;
+  continueReading?: boolean;
+}

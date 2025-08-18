@@ -23,7 +23,7 @@ export default function ReaderManga() {
           workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
         >
           <Viewer
-            fileUrl={`http://localhost:8000/${file}`}
+            fileUrl={file as any}
             plugins={[defaultLayoutPluginInstance]}
           />
         </Worker>

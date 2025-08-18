@@ -26,23 +26,3 @@ export const Login = (data: LoginUserType)=>{
     withCredentials: true
   })
 }
-/*
-  respuesta correcta:
-{
-  "id": 3,
-  "password": "123123",
-  "last_login": null,
-  "is_superuser": false,
-  "first_name": "",
-  "last_name": "",
-  "is_staff": false,
-  "is_active": false,
-  "date_joined": "2025-07-19T01:02:11.197491Z",
-  "username": "test123",
-  "email": "test@gmail.com",
-  "avatarUrl": "default-avatar.jpg",
-  "favorites": [],
-  "groups": [],
-  "user_permissions": []
-}
-*/

@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='appuser',
             name='avatar',
-            field=models.ImageField(default='/users/default-avatar.jpg', upload_to=server.models.unique_avatar_image_path),
+            field=models.ImageField(default='/users/default-avatar.webp', upload_to=server.models.unique_avatar_image_path),
         ),
     ]
