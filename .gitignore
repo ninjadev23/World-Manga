@@ -9,7 +9,8 @@ db.sqlite
 */__pycache__/
 *.pyc
 **/migrations/__pycache__/
-
+/media/covers/
+/media/volumes/
 dist/
 staticfiles/
 *.log

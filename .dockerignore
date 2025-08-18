@@ -4,6 +4,9 @@ npm-debug.log
 yarn-error.log
 pnpm-lock.yaml
 
+media/volumes/
+media/covers/
+
 # Archivos de Python
 __pycache__
 *.pyc
