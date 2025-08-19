@@ -6,7 +6,6 @@ services:
     container_name: mangahub_prod
     ports:
       - "80:80"   # Nginx
-      - "8000:8000"
     volumes:
       - ./media:/app/media   # sincroniza la carpeta media para uploads
     env_file:
