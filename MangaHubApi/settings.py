@@ -146,9 +146,10 @@ REST_FRAMEWORK = {
     ],
 }
 
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'frontend', 'dist')]
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'dist', 'assets'),
-]
+#TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'frontend', 'dist')]
+#STATICFILES_DIRS = [
+#   os.path.join(BASE_DIR, 'frontend', 'dist', 'assets'),
+#]
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles')]
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
