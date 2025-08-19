@@ -29,7 +29,7 @@ RUN pip install --no-cache-dir -r requirements.txt gunicorn dj-database-url
 COPY . .
 
 # Copiar el build del frontend al static de Django
-COPY --from=frontend-build /app/frontend/dist /app/frontend/dist
+COPY --from=frontend-build /app/frontend/dist /app/staticfiles
 
 # Crear carpeta para media
 RUN mkdir -p /app/media
