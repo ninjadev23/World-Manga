@@ -145,10 +145,11 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
     ],
 }
+
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'frontend', 'dist')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'dist', 'assets'),
+]
+
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static', 'assets')
-]
