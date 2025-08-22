@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["world-manga-production.up.railway.app", "localhost"]
 
 
 # Application definition
@@ -127,8 +127,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -146,10 +146,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-#TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'frontend', 'dist')]
-#STATICFILES_DIRS = [
-#   os.path.join(BASE_DIR, 'frontend', 'dist', 'assets'),
-#]
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles')]
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles')]
