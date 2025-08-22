@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 export default function Share() {
+  const BASE = import.meta.env.BASE_URL;
   const [imageOne, setImageOne] = useState(1);
   const [imageTwo, setImageTwo] = useState(6);
   const [animatingOne, setAnimatingOne] = useState(false);
@@ -48,7 +49,7 @@ export default function Share() {
                 ? "opacity-0 translate-x-10"
                 : "opacity-100 translate-x-0"
             )}
-            src={`/wallpaper${imageOne}.webp`}
+            src={`${BASE}wallpaper${imageOne}.webp`}
             alt=""
           />
           <Link
@@ -68,7 +69,7 @@ export default function Share() {
                 ? "opacity-0 -translate-x-10"
                 : "opacity-100 translate-x-0"
             )}
-            src={`/ImageTomos/cover${imageTwo}.webp`}
+            src={`${BASE}ImageTomos/cover${imageTwo}.webp`}
             alt=""
           />
           <Link

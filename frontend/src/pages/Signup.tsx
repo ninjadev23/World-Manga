@@ -7,6 +7,7 @@ import { isAxiosError } from "axios";
 import { useUser } from "../context/UserContext";
 export default function Signup() {
   
+  const BASE = import.meta.env.BASE_URL;
   const navigate = useNavigate();
   const { refreshUser } = useUser();
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -74,7 +75,7 @@ export default function Signup() {
       <div className="flex justify-center mb-6">
         <label className="relative group w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 cursor-pointer rounded-full overflow-hidden shadow-md">
           <img
-            src={avatarPreview ? avatarPreview : "/default-avatar.webp"}
+            src={avatarPreview ? avatarPreview : (BASE+"default-avatar.webp")}
             alt="Foto de perfil"
             className="w-full h-full object-cover rounded-full transition duration-300"
           />

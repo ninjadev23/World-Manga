@@ -4,6 +4,7 @@ import { Menu, X, Search, Github } from "lucide-react";
 import { useUser } from "../context/UserContext";
 import { useSearch } from "../context/SearchContext";
 export default function Layout() {
+  const BASE = import.meta.env.BASE_URL;
   //Hooks
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,7 +34,7 @@ export default function Layout() {
   useEffect(() => {
     for (let i = 1; i <= 18; i++) {
       const img = new Image();
-      img.src = `/backgrounds/background${i}.webp`;
+      img.src = `${BASE}backgrounds/background${i}.webp`;
     }
   }, []);
 
@@ -57,7 +58,7 @@ export default function Layout() {
         key={backgroundNumber}
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `linear-gradient(to top left, rgba(0,0,0,0.4), rgba(17,24,39,0.3)), url(/backgrounds/background${backgroundNumber}.webp)`,
+          backgroundImage: `linear-gradient(to top left, rgba(0,0,0,0.4), rgba(17,24,39,0.3)), url(${BASE}backgrounds/background${backgroundNumber}.webp)`,
           opacity: show ? 1 : 0,
         }}
       />
@@ -66,7 +67,7 @@ export default function Layout() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link to="/">
-                <img className="w-20 h-15 object-cover" src="/icono.webp" alt="World Manga" />
+                <img className="w-20 h-15 object-cover" src={`${BASE}icono.webp`} alt="World Manga" />
               </Link>
 
               <div className="flex items-center space-x-8 max-[940px]:space-x-4">
