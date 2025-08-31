@@ -60,7 +60,10 @@ class UploadVolumeView(APIView):
 
         if serializer.is_valid():
             volume = serializer.save(manga=manga)
-            return Response(VolumeSerializer(volume).data, status=status.HTTP_200_OK)
+            return Response(
+                VolumeSerializer(volume, context={'request': request}).data,
+                status=status.HTTP_201_CREATED
+            )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
