@@ -69,6 +69,7 @@ class VolumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Volume
         fields = ['number', 'file', 'cover', 'id']
+        read_only_fields = ['manga']
     
     def validate_file(self, value):
         ext = os.path.splitext(value.name)[1].lower()
