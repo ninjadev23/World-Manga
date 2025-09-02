@@ -18,7 +18,7 @@ export const CreateManga = (data: FormData)=>{
 }
 export const CreateVolume = (mangaID: number, data: FormData)=>{
   return axios.post(`/api/v1/mangas/${mangaID}/volumes/`, data, {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: { Accept: "application/json" },
     withCredentials: true
   })
 }
