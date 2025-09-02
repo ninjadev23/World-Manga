@@ -28,6 +28,7 @@ class Volume(models.Model):
     file = models.FileField(upload_to=unique_volume_file_path)
     cover = models.ImageField(upload_to=unique_cover_image_path, default='volumes/covers/default-cover.webp')
     number = models.PositiveIntegerField()
+    read_only_fields = ['manga']
     def __str__(self):
         return f"Volume {self.number} of {self.manga.title}"
 
