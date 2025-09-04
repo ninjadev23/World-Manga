@@ -38,12 +38,7 @@ RUN mkdir -p /app/media
 EXPOSE 8000
 
 # Comando de arranque: solo Gunicorn
-CMD exec gunicorn MangaHubApi.wsgi:application \
-  --bind 0.0.0.0:${PORT:-8000} \
-  --workers ${WEB_CONCURRENCY:-2} \
-  --threads ${GUNICORN_THREADS:-4} \
-  --worker-class gthread \
-  --timeout ${GUNICORN_TIMEOUT:-180} \
-  --graceful-timeout 30 \
-  --keep-alive 15 \
-  --worker-tmp-dir /dev/shm
+CMD gunicorn MangaHubApi.wsgi:application \
+  --bind 0.0.0.0:8000 \
+  --workers 3 \
+  --timeout 180
