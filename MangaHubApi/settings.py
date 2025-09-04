@@ -148,3 +148,5 @@ REST_FRAMEWORK = {
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles')]
+FILE_UPLOAD_MAX_MEMORY_SIZE = 120 * 1024 * 1024   # 120 MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 120 * 1024 * 1024   # 120 MB
