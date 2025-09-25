@@ -105,23 +105,24 @@ export default function NewMangas() {
             </div>
           </label>
         )}
-        {!coverPreview && (
-          <>
-            <label htmlFor="cover" className="font-bold text-white/50 pt-5">
-              Portada:
-            </label>
-            <label
-              htmlFor="cover"
-              className="group relative transition-all duration-500 hover:bg-black/60 hover:cursor-pointer w-28 h-28 p-5 border-white/40 border-dashed border-2"
-            >
-              <Image className="w-full h-full text-white/40" />
-              <p className="w-full absolute top-9 left-1 hidden group-hover:block font-bold text-white">
-                Subir Portada
-              </p>
-            </label>
-          </>
-        )}
-        <input
+       {!coverPreview && (
+  <>
+    <label htmlFor="cover" className="font-bold text-white/50 pt-5">
+      Portada:
+    </label>
+    <label
+      htmlFor="cover"
+      className="group relative flex items-center justify-center transition-all duration-500 hover:bg-black/60 hover:cursor-pointer w-28 h-28 p-5 border-white/40 border-dashed border-2"
+    >
+      <Image className="w-full h-full text-white/40" />
+      <p className="text-lg absolute hidden group-hover:block font-bold text-white">
+        Subir
+      </p>
+    </label>
+  </>
+)}
+
+       <input
           accept="image/*"
           onChange={handleFileChange}
           type="file"
