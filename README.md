@@ -32,6 +32,7 @@ Windows
 ```
 venv\Scripts\activate.bat
 ```
+Install requirements and run
 ```
 pip install -r requirements.txt
 ```
